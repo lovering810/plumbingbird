@@ -1,5 +1,5 @@
 from typing import Any
-from ...extractors.api_fetcher import APIStreamFetcher
+from ...etl.extractors.api_fetcher import APIStreamFetcher
 
 BASE_URL = "https://dummyjson.com"
 DUMMY_AUTH = {"API_USER": "kminchelle", "API_PW": "0lelplR"}
