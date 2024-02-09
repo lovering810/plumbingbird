@@ -1,7 +1,7 @@
 import pytest
 from collections.abc import Iterator
 from pathlib import Path
-from ...transformers.csv_streamer import CSVBuffer
+from ...etl.transformers.csv_streamer import CSVBuffer
 from ..demo.dummy_api_fetcher import DummyJSON
 from ...utilities.streamer import StringIteratorIO
 
