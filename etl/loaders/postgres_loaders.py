@@ -1,5 +1,5 @@
-from utilities.etl_primitives import Loader
-from utilities.environment import get_secret
+from ...utilities.etl_primitives import Loader
+from ...utilities.environment import get_secret
 import psycopg2 as pg
 from datetime import datetime, timezone
 from typing import Any, Iterator

@@ -1,7 +1,7 @@
 import requests
 from typing import Any, Iterator
-from ..utilities.etl_primitives import Fetcher
-from ..utilities.environment import get_secret
+from ...utilities.etl_primitives import Fetcher
+from ...utilities.environment import get_secret
 
 
 class APIFetcher(Fetcher):
