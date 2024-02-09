@@ -4,8 +4,6 @@ import os
 import socket
 import yaml
 from collections import ChainMap, Counter
-import boto3
-import ast
 
 # from functools import partial
 from pathlib import Path
@@ -68,7 +66,7 @@ def _populate_local_secrets() -> dict:
                 raise NotImplementedError(
                     f"Data from secrets file not a list, dict, or generator: {
                         type(data)
-                        }"
+                    }"
                 )
     # check for collisions across multiple secrets files
     all_secrets = [key for sdict in secrets_list for key in sdict]
@@ -81,26 +79,6 @@ def _populate_local_secrets() -> dict:
     # unpack list of dicts into one dict
     # NOTE: this method will overwrite duplicate keys, hence the check above
     return dict(ChainMap(*secrets_list))
-
-
-def read_secrets_manager(
-        secret_name: str,
-        region_name: str = "us-east-1"
-) -> dict:
-    """Grabs all the secrets and their values attached to a specific
-    AWS Secrets Manager secret name. It's no secret that the other
-    secret functions here are dreadful, and this strives to replace
-    local config files.
-    :param str secret_name: Name of secret (contains many secrets)
-    :return str: The dict with all the vars
-    """
-
-    session = boto3.session.Session()
-    client = session.client(
-        service_name="secretsmanager", region_name=region_name
-    )
-    get_secret_value_response = client.get_secret_value(SecretId=secret_name)
-    return ast.literal_eval(get_secret_value_response["SecretString"])
 
 
 LOCALSECRETS = _populate_local_secrets()
