@@ -1,8 +1,8 @@
 from pathlib import Path
 from typing import Any, Iterator
 
-from utilities.etl_primitives import Buffer
-from utilities.streamer import StringIteratorIO
+from ..utilities.etl_primitives import Buffer
+from ..utilities.streamer import StringIteratorIO
 
 
 class CSVBuffer(Buffer):

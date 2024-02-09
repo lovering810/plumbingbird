@@ -2,22 +2,17 @@ import pytest
 from ..demo.dummy_api_fetcher import DummyJSON
 from collections.abc import Generator
 
-BASE_URL = "https://dummyjson.com"
-DUMMY_AUTH = {"API_USER": "kminchelle", "API_PW": "0lelplR"}
-
 
 @pytest.fixture
 def api_fetcher():
-    return DummyJSON(
-        endpoint="products", parse_key="products", base_url=BASE_URL, auth=DUMMY_AUTH
-    )
+    return DummyJSON(endpoint="products", parse_key="products")
 
 
 def test_conn(api_fetcher):
     sesh = api_fetcher.connect()
     assert sesh
     assert sesh.auth
-    response = sesh.get(BASE_URL)
+    response = sesh.get(api_fetcher.base_url)
     assert response.ok
 
 
