@@ -1,7 +1,7 @@
 import requests
 from typing import Any, Iterator
-from utilities.etl_primitives import Fetcher
-from utilities.environment import get_secret
+from ..utilities.etl_primitives import Fetcher
+from ..utilities.environment import get_secret
 
 
 class APIFetcher(Fetcher):
@@ -10,10 +10,12 @@ class APIFetcher(Fetcher):
         self,
         endpoint: str,
         base_url: str = None,
+        auth: dict = None,
     ) -> None:
         base_url = base_url or get_secret("BASE_URL")
         self.base_url = base_url
         self.endpoint = endpoint
+        self.auth = auth
         super().__init__()
 
     def compose_url(self, *args, **kwargs):
@@ -31,9 +33,10 @@ class APIFetcher(Fetcher):
         return: requests.Session
         """
         session = requests.Session()
-        API_USER = get_secret("API_USER")
-        API_PW = get_secret("API_PW")
-        session.auth = (API_USER, API_PW)
+        if self.auth:
+            API_USER = self.auth["API_USER"]
+            API_PW = self.auth["API_PW"]
+            session.auth = (API_USER, API_PW)
         return session
 
     def fetch(self, *args, **kwargs):
@@ -47,9 +50,10 @@ class APIFetcher(Fetcher):
 
 class APIStreamFetcher(APIFetcher):
 
-    def __init__(self, endpoint: str, base_url: str = None) -> None:
-        super().__init__(endpoint, base_url)
+    def __init__(self, endpoint: str, base_url: str = None, auth: dict = None) -> None:
+        super().__init__(endpoint, base_url, auth)
 
+    @staticmethod
     def stop_iter(parsed_response: Any):
         """
         Function to determine if the query loop should end.

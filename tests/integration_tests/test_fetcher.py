@@ -1,13 +1,16 @@
 import pytest
-from demo.dummy_api_fetcher import DummyJSON
+from ..demo.dummy_api_fetcher import DummyJSON
 from collections.abc import Generator
 
 BASE_URL = "https://dummyjson.com"
+DUMMY_AUTH = {"API_USER": "kminchelle", "API_PW": "0lelplR"}
 
 
 @pytest.fixture
 def api_fetcher():
-    return DummyJSON(endpoint="products", parse_key="products")
+    return DummyJSON(
+        endpoint="products", parse_key="products", base_url=BASE_URL, auth=DUMMY_AUTH
+    )
 
 
 def test_conn(api_fetcher):
