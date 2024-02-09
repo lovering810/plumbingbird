@@ -22,7 +22,7 @@ class Buffer:
 
     @staticmethod
     def load_keymap(keymap_loc: Path = None) -> dict:
-        if not keymap_loc:
+        if not keymap_loc or not keymap_loc.exists():
             return None
         map_suffix = keymap_loc.suffix
         if map_suffix == ".yaml" or map_suffix == ".yml":
