@@ -1,5 +1,5 @@
 import pytest
-from extractors.api_fetcher import APIStreamFetcher
+from demo.dummy_api_fetcher import DummyJSON
 from collections.abc import Generator
 
 BASE_URL = "https://dummyjson.com"
@@ -7,7 +7,7 @@ BASE_URL = "https://dummyjson.com"
 
 @pytest.fixture
 def api_fetcher():
-    return APIStreamFetcher(endpoint="products", parse_key="products")
+    return DummyJSON(endpoint="products", parse_key="products")
 
 
 def test_conn(api_fetcher):
