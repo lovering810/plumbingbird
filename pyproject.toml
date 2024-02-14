@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "plumbingbird"
+version = "0.1.0"
+description = "Handy tools for common data engineering needs."
+authors = ["Rebecca Lovering <lovering810@gmail.com>"]
+license = "GNU GPLv3"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+boto3 = "^1.7.84"
+python-dotenv = "*"
+pytest = "*"
+psycopg2 = "*"
+requests = "*"
+pyyaml = "*"
+smart_open = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
