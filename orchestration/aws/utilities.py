@@ -9,7 +9,7 @@ import json
 import smart_open
 from pathlib import Path
 from typing import List, Union, Optional, Dict
-from ...utilities.environment import get_secret
+from utilities.environment import get_secret
 
 logger = logging.getLogger(__name__)
 
