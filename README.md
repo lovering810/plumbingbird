@@ -5,6 +5,10 @@ Handy tools for common use cases in data engineering
 
 I got tired of reinventing wheels across jobs in data engineering, so I decided to make a repo for them instead. Nothing in here is specific business logic, it's intended to be mostly higher order functions so you can plug and play.
 
+### Installation Dependencies
+1. `postgresql`
+2. `poetry`
+
 ## Organization
 
 ### Utilities

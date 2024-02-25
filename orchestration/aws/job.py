@@ -1,5 +1,6 @@
 import logging
 from pathlib import Path
+from typing import Optional
 
 from utilities.orchestration_primitives import Job, JobParams
 from utilities.environment import get_secret
@@ -10,9 +11,9 @@ class AWSJob(Job):
     def __init__(
         self,
         params: JobParams,
-        input_dir: Path = None,
-        output_dir: Path = None,
-        logger: logging.Logger = None,
+        input_dir: Optional[Path] = None,
+        output_dir: Optional[Path] = None,
+        logger: Optional[logging.Logger] = None,
         live: bool = False,
     ):
         super().__init__(
@@ -23,7 +24,7 @@ class AWSJob(Job):
             live=live,
         )
 
-    def upload(self, dest: str, output: list[Path], local_dir: Path = None):
+    def upload(self, dest: str, output: list[Path], local_dir: Optional[Path] = None):
         """Uploads local files to S3.
 
         :param str dest: Destination filepath prefix

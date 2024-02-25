@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Iterator
+from typing import Iterator, Optional
 
 from ...utilities.etl_primitives import Buffer
 from ...utilities.streamer import StringIteratorIO
@@ -7,11 +7,11 @@ from ...utilities.streamer import StringIteratorIO
 
 class CSVBuffer(Buffer):
 
-    def __init__(self, iter: Iterator, keymap_loc: Path = None) -> None:
+    def __init__(self, iter: Iterator, keymap_loc: Optional[Path] = None) -> None:
         super().__init__(iter, keymap_loc)
 
     @staticmethod
-    def clean_value(value: str = None) -> str:
+    def clean_value(value: Optional[str] = None) -> str:
         """
         CSV-specific string revision for values to ensure null values and
         newlines in content are correctly handled.

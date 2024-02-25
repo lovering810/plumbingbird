@@ -157,7 +157,7 @@ def _get_simple_auth_kwargs() -> Dict[str, str]:
     }
 
 
-def make_aws_session(session_kwargs: Dict[str, str] = None) -> boto3.Session:
+def make_aws_session(session_kwargs: Optional[Dict[str, str]] = None) -> boto3.Session:
     """Make AWS session using environment credentials.
 
 
@@ -192,7 +192,7 @@ def _get_role_kwargs(role_secret: str) -> dict:
 
 
 def get_client(
-    client_type, session: boto3.Session = None, role_secret: str = None
+    client_type, session: Optional[boto3.Session] = None, role_secret: Optional[str] = None
 ) -> botocore.client:
     session = session or make_aws_session(
         session_kwargs=(
@@ -207,7 +207,7 @@ def get_client(
 
 ######## DynamoDB Resources
 def get_dynamodb_table(
-    table_name: str = None, session: Optional[boto3.Session] = None
+    table_name: Optional[str] = None, session: Optional[boto3.Session] = None
 ) -> boto3.resources.base.ServiceResource:
     """Retrieve DynamoDB table by name
 

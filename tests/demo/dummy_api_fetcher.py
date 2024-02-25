@@ -1,5 +1,5 @@
-from typing import Any
-from ...etl.extractors.api_fetcher import APIStreamFetcher
+from typing import Any, Optional
+from etl.extractors.api_fetcher import APIStreamFetcher
 
 BASE_URL = "https://dummyjson.com"
 DUMMY_AUTH = {"API_USER": "kminchelle", "API_PW": "0lelplR"}
@@ -10,7 +10,7 @@ class DummyJSON(APIStreamFetcher):
     def __init__(
         self,
         endpoint: str,
-        parse_key: str = None,
+        parse_key: Optional[str] = None,
         base_url: str = BASE_URL,
         auth: dict = DUMMY_AUTH,
     ) -> None:

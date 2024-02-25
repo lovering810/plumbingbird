@@ -2,7 +2,7 @@ import json
 import logging
 import yaml
 from pathlib import Path
-from typing import Iterator
+from typing import Iterator, Optional
 
 
 class Fetcher:
@@ -16,12 +16,12 @@ class Fetcher:
 
 class Buffer:
 
-    def __init__(self, iter: Iterator, keymap_loc: Path) -> None:
+    def __init__(self, iter: Iterator, keymap_loc: Optional[Path] = None) -> None:
         self.iter = iter
         self.keymap = self.load_keymap(keymap_loc) or {}
 
     @staticmethod
-    def load_keymap(keymap_loc: Path = None) -> dict:
+    def load_keymap(keymap_loc: Optional[Path] = None) -> Optional[dict]:
         if not keymap_loc or not keymap_loc.exists():
             return None
         map_suffix = keymap_loc.suffix

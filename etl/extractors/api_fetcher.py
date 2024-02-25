@@ -1,5 +1,5 @@
 import requests
-from typing import Any, Iterator
+from typing import Any, Iterator, Optional
 from ...utilities.etl_primitives import Fetcher
 from ...utilities.environment import get_secret
 
@@ -9,8 +9,8 @@ class APIFetcher(Fetcher):
     def __init__(
         self,
         endpoint: str,
-        base_url: str = None,
-        auth: dict = None,
+        base_url: Optional[str] = None,
+        auth: Optional[dict] = None,
     ) -> None:
         base_url = base_url or get_secret("BASE_URL")
         self.base_url = base_url
@@ -50,7 +50,7 @@ class APIFetcher(Fetcher):
 
 class APIStreamFetcher(APIFetcher):
 
-    def __init__(self, endpoint: str, base_url: str = None, auth: dict = None) -> None:
+    def __init__(self, endpoint: str, base_url: Optional[str] = None, auth: Optional[dict] = None) -> None:
         super().__init__(endpoint, base_url, auth)
 
     @staticmethod
