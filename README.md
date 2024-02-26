@@ -9,6 +9,21 @@ I got tired of reinventing wheels across jobs in data engineering, so I decided 
 1. `[postgresql](https://www.postgresql.org/download/)`
 2. `[poetry](https://python-poetry.org/docs/#installation)`
 
+When sharing this repo out, we found that some dependencies were crazy heavy, and it made sense to separate them so only those who really need them will have to wait for them to download. Accordingly, we've put `boto3` and `psycopg2` in as optional extra poetry dependencies, and separated the development dependencies `pytest` and `mypy` into their own extra, too.
+
+If you want them in your poetry env, you need to run `poetry install` with the extras flag, like so:
+
+```
+poetry install --extras "dev psql aws"
+```
+
+or 
+
+```
+poetry install -E psql -E aws -E dev
+```
+
+
 ## Organization
 
 ### Utilities
