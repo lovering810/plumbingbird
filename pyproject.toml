@@ -1,20 +1,30 @@
 [tool.poetry]
 name = "plumbingbird"
-version = "0.1.0"
+version = "0.1.1"
 description = "Handy tools for common data engineering needs."
-authors = ["Rebecca Lovering <lovering810@gmail.com>"]
+authors = ["Rebecca Lovering <lovering810@gmail.com>", "Alicia Bargar <abargar@gmail.com>"]
 license = "GNU GPLv3"
 readme = "README.md"
 
+# Default Dependencies
 [tool.poetry.dependencies]
 python = "^3.12"
-boto3 = "^1.7.84"
 python-dotenv = "*"
-pytest = "*"
-psycopg2 = "*"
-requests = "*"
-pyyaml = "*"
+requests = "^2.31.0"
+pyyaml = "^6.0.1"
 smart_open = "*"
+
+
+pytest = { version = "*", optional = true }
+mypy = { version = "*", optional = true }
+
+psycopg2 = { version = "*", optional = true }
+boto3 = { version = "^1.7.84", optional = true }
+
+[tool.poetry.extras]
+psql = ["psycopg2"]
+aws = ["boto3"]
+dev = ["mypy","pytest"]
 
 [build-system]
 requires = ["poetry-core"]
