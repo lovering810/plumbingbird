@@ -2,7 +2,7 @@ from ...utilities.etl_primitives import Loader
 from ...utilities.environment import get_secret
 import psycopg2 as pg
 from datetime import datetime, timezone
-from typing import Any, Iterator
+from typing import Any, Iterator, Optional
 
 
 DB_HOST = get_secret("DB_HOST")
@@ -27,7 +27,7 @@ class PGLoader(Loader):
         self,
         table_name: str,
         fields: list[str],
-        cursor: pg.extensions.connection = None,
+        cursor: Optional[pg.extensions.cursor] = None,
     ):
 
         if not cursor:
@@ -73,7 +73,7 @@ class PGStreamLoader(PGLoader):
         items: Iterator[dict[str, Any]],
         table_name: str,
         fields: list[str],
-        connection: pg.extensions.connection = None,
+        connection: Optional[pg.extensions.connection] = None,
     ) -> None:
         if not connection:
             connection = self.get_db_conn()

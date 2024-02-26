@@ -85,7 +85,7 @@ class Infrastructure:
 
         self._download(origin, download_files, local_dir)
 
-    def upload(self, dest: str, output: list[Path], local_dir: Path = None):
+    def upload(self, dest: str, output: list[Path], local_dir: Optional[Path] = None):
         """Uploads local files to destination.
 
         :param str dest: Destination filepath prefix
@@ -130,9 +130,9 @@ class Job:
     def __init__(
         self,
         params: JobParams,
-        input_dir: Path = None,
-        output_dir: Path = None,
-        logger: logging.Logger = None,
+        input_dir: Optional[Path] = None,
+        output_dir: Optional[Path] = None,
+        logger: Optional[logging.Logger] = None,
         live: bool = False,
     ):
         self.params = params
@@ -142,7 +142,7 @@ class Job:
         self.validate_dirs()
         self.logger = logger or logging.getLogger(__name__)
 
-    def validate_dirs(self, to_check: list = None, make_live: list = None):
+    def validate_dirs(self, to_check: Optional[list] = None, make_live: Optional[list] = None):
         to_check = to_check or [self.input_dir]
         make_live = make_live or [self.output_dir]
         if self.live:
@@ -164,7 +164,7 @@ class Job:
         output_dir.mkdir(exist_ok=True, parents=True)
         return output_dir
 
-    def manage_pool(self, func: callable, input_list: list, func_args: dict = {}):
+    def manage_pool(self, func: Callable, input_list: list, func_args: dict = {}):
         # create Pool
         pool = Pool(processes=cpu_count())
         self.logger.info(f"Created a pool with {cpu_count()} processes.")

@@ -4,7 +4,7 @@ import logging
 import traceback
 
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable, Optional
 
 from utilities.orchestration_primitives import Infrastructure
 from orchestration.aws.utilities import get_client, get_secret
@@ -50,7 +50,7 @@ class AWSInfrastructure(Infrastructure):
         self.queue = boto_resource.get_queue_by_name(QueueName=queue_name)
         return True  # TODO Is this needed?
 
-    def listen(self, callback: callable[[dict[str, Any]], None]):
+    def listen(self, callback: Callable[[dict[str, Any]], None]):
         """Listens to SQS queue and does stuff if a message shows up.
 
         :param Callable[[dict[str, Any]], None] callback: Function to call back to
@@ -93,7 +93,7 @@ class AWSInfrastructure(Infrastructure):
                 Filename=f"{str(local_dir)}/{filename}",
             )
 
-    def upload(self, dest: str, output: list[Path], local_dir: Path = None):
+    def upload(self, dest: str, output: list[Path], local_dir: Optional[Path] = None):
         """Uploads local files to S3.
 
         :param str dest: Destination filepath prefix
